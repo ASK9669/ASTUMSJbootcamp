@@ -1,0 +1,15 @@
+t = int(input())
+
+for i in range(t):
+    n = int(input())
+    a = list(map(int, input().split()))
+
+    a.sort()
+
+    ok = True
+    for i in range(1, n - 1, 2):
+        if a[i] != a[i + 1]:
+            ok = False
+            break
+
+    print("YES" if ok else "NO")
