@@ -1,20 +1,24 @@
-from bisect import bisect_left
-
 n, m = map(int, input().split())
-a = list(map(int, input().split()))
 
-prefix = []
-total = 0
+a, b = list(map(int, input().split())), list(map(int, input().split()))
+
+prefix , s = [], 0
 
 for x in a:
-    total += x
-    prefix.append(total)
+    s += x
+    prefix.append(s)
 
-for _ in range(m):
-    b = int(input())
+for room in b:
+    left, right = 0, n - 1
 
-    i = bisect_left(prefix, b)
+    while left <= right:
+        mid = (left + right) // 2
 
-    previous = 0 if i == 0 else prefix[i - 1]
+        if prefix[mid] >= room:
+            right = mid - 1
+        else:
+            left = mid + 1
 
-    print(i + 1, b - previous)
+    dorm = left
+
+    print (*(1, room) if dorm == 0 else (dorm + 1, room - prefix[dorm - 1]))
